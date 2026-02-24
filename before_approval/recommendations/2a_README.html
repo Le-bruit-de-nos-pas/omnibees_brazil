@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3 - README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+  <!-- MathJax for LaTeX rendering -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/javascript">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    }
+  });
+</script>
+
+<style>
+/* Dark GitHub-Themed Styling with More Color Diversity */
+body {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 16px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+
+.embedded-image {
+    max-width: 100%; /* Ensures it never exceeds the container */
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto; /* Centers the image */
+}
+
+h1, h2, h3 {
+    color: #58a6ff;
+    font-weight: bold;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 5px;
+}
+
+a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+code, pre {
+    font-family: "Fira Code", monospace;
+    background-color: #161b22;
+    color: #c9d1d9;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+pre {
+    overflow-x: auto;
+    padding: 15px;
+    border: 1px solid #30363d;
+}
+
+blockquote {
+    background-color: #161b22;
+    border-left: 5px solid #58a6ff;
+    padding: 10px 20px;
+    margin: 10px 0;
+    color: #8b949e;
+}
+
+hr {
+    border: 1px solid #30363d;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #30363d;
+    padding: 10px;
+}
+
+thead {
+    background-color: #161b22;
+}
+
+/* Highlight.js Dark Theme with More Colors */
+.hljs {
+    background: #161b22;
+    color: #c9d1d9;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.hljs-comment, .hljs-quote {
+    color: #8b949e;
+    font-style: italic;
+}
+
+.hljs-keyword, .hljs-selector-tag {
+    color: #ff5555;
+    font-weight: bold;
+}
+
+.hljs-string, .hljs-title, .hljs-section {
+    color: #4ab4f1;
+}
+
+.hljs-number, .hljs-attribute, .hljs-symbol {
+    color: #ff79c6;
+}
+
+.hljs-built_in, .hljs-builtin-name, .hljs-literal {
+    color: #8be9fd;
+}
+
+.hljs-variable, .hljs-template-variable, .hljs-class, .hljs-function {
+    color: #ffb86c;
+}
+
+.hljs-type {
+    color: #ff5555;
+}
+
+.hljs-meta, .hljs-meta-keyword, .hljs-meta-string {
+    color: #f1fa8c;
+}
+
+.hljs-operator {
+    color: #ff79c6;
+}
+
+.hljs-punctuation {
+    color: #c9d1d9;
+}
+
+.hljs-tag {
+    color: #251b90;
+}
+</style>
+</head>
+<body>
+<!-- Your content goes here -->
+</body>
+</html>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="paulo-bastos">Paulo Bastos</h2>
+<h2 id="march-30th-2025">March 30th 2025</h2>
+<h2 id="main-keypoints">Main Keypoints</h2>
+<blockquote>
+<p>This document outlines the strategy for &quot;recommending&quot; new channels to existing hotels using exclusively past and neighboring behaviors (i.e., current hotel-channel combinations for each hotel/channel). As such, this versions does not take into account specific hotel/channel characteristics (e.g., size, price, geography).</p>
+<p>→ <code>code</code> subfolder contains any code scripts, currently all under the <code>svd_channels_to_hotel.ipynb</code> notebook.</p>
+<p>→ <code>data</code> subfolder contains any <code>input/other</code> data. This consists of a list of all observed hotel-channel combinations requests (ever).</p>
+<p>→ <code>out</code> subfolder contains any <code>output</code> data. In it, the new recommendations for each hotel together with its score at available on the <code>svd_hotel_channel_recommendations_df_top50.csv</code> file. The <code>svd_recommendations_dict.pkl</code> contains a dictionary with this same thata in python native format. Only the top 50 recommendations (excluding exisitng channels for that specific hotel) are included.</p>
+<p>→ <code>docs</code> subfolder contains any <code>documentation</code> for the present analysis. Start with the respective <code>README.html</code> file.</p>
+</blockquote>
+<blockquote>
+<p>→ We implemented a <strong>Singular Value Decomposition (SVD)-based recommendation system</strong> to suggest <strong>new channels</strong> for hotels. The goal was to identify channels that a hotel was <strong>not yet interacting with</strong>, using latent factor analysis to predict potential interactions.</p>
+<p>→ SVD is a powerful matrix factorization technique that decomposes a given interaction matrix into <strong>lower-dimensional latent factors</strong> representing hotels and &gt; channels.</p>
+<p>The purpose of using SVD is to decompose a large, sparse matrix (such as a user-item or hotel-channel matrix) into smaller, dense matrices that represent the latent factors underlying the data.</p>
+<p>For example, in a hotel-channel recommendation system:</p>
+<ul>
+<li>The rows represent hotels (users).</li>
+<li>The columns represent channels (items).</li>
+<li>The entries represent whether a hotel uses a particular channel or not (binary, 0 or 1), or how much they use the channel (ratings).</li>
+</ul>
+<p>SVD allows us to reduce the dimensionality of this matrix, uncover hidden relationships (latent factors) between hotels and channels, and predict missing values (channels a hotel might be interested in). By doing so, SVD helps generate accurate recommendations based on user (hotel) preferences and item (channel) characteristics, even for unknown combinations.</p>
+</blockquote>
+<blockquote>
+<h3 id="since-the-interaction-matrix-is-sparse-many-missing-values-svd-helps-approximate-missing-interactions">Since the interaction matrix is <strong>sparse</strong> (many missing values), SVD helps <strong>approximate missing interactions</strong>.</h3>
+</blockquote>
+<blockquote>
+<h3 id="conceptual-explanation">Conceptual Explanation</h3>
+<p>SVD works by decomposing the original matrix <code>R</code> (of shape <code>m x n</code> where <code>m</code> is the number of users (hotels) and <code>n</code> is the number of items (channels)) into three smaller matrices:</p>
+<p>$$
+R = U \Sigma V^T
+$$</p>
+<h3 id="what-does-this-decomposition-represent">What does this decomposition represent?</h3>
+<ol>
+<li>
+<p><strong>(User Features Matrix)</strong>: Each row of this matrix represents a hotel (user) in the latent factor space, capturing the latent characteristics that describe each hotel’s preferences or behaviors.</p>
+</li>
+<li>
+<p><strong>(Singular Values Matrix)</strong>: These values capture the importance of each latent factor in the decomposition. They are sorted in descending order, and larger values indicate that the corresponding latent factors are more significant.</p>
+</li>
+<li>
+<p><strong>(Item Features Matrix)</strong>: Each column of this matrix represents a channel (item) in the latent factor space, capturing the latent characteristics that describe each channel’s attributes or features.</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<h3 id="how-does-svd-help-in-recommendations">How Does SVD Help in Recommendations?</h3>
+<p>SVD allows us to make predictions for missing values in the matrix (e.g., predicting how much a hotel would be expected to be paired with a certain channel that they have never used before). Once the decomposition is done, the predicted rating for a hotel-channel combination can be calculated as:</p>
+<p>$$
+\hat{R}_{ij} = U_i \Sigma V_j^T
+$$</p>
+</blockquote>
+<blockquote>
+<p>By multiplying these components together, we obtain an estimate of the rating (or preference) that a hotel would give to a channel.</p>
+</blockquote>
+<blockquote>
+<h4 id="the-decomposition-aims-to-approximate-the-original-matrix-by-the-product-of-3-new-matrices-the-latent-factors-in-capture-the-underlying-structure-and-relationships-between-users-and-items-or-hotels-and-channels-even-if-the-original-data-matrix-is-sparse">The decomposition aims to approximate the original matrix by the product of 3 new matrices. The latent factors in capture the underlying structure and relationships between users and items (or hotels and channels), even if the original data matrix is sparse.</h4>
+</blockquote>
+<blockquote>
+<h3 id="practical-aspects-of-svd">Practical Aspects of SVD</h3>
+<ol>
+<li>
+<p><strong>Dimensionality Reduction</strong>: The number of latent factors is typically much smaller than the number of rows and columns in the original matrix. This reduction in dimensions helps in making the computations more efficient and reveals patterns in the data that might otherwise be difficult to detect.</p>
+</li>
+<li>
+<p><strong>Regularization</strong>: In practice, regularization is often applied to prevent overfitting, particularly when dealing with sparse matrices. Regularization terms are added to the loss function to penalize large values in the latent factors.</p>
+</li>
+<li>
+<p><strong>Alternating Least Squares (ALS)</strong>: SVD is typically computed using iterative methods like <strong>Alternating Least Squares (ALS)</strong>, where the latent factors are updated alternately for users and items to minimize the reconstruction error of the original matrix.</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<h3 id="steps-in-training-an-svd-model">Steps in Training an SVD Model</h3>
+<ol>
+<li><strong>Matrix Decomposition</strong>: The matrix is decomposed into 3 new matrices.</li>
+<li><strong>Model Fitting</strong>: The SVD model learns the latent factors that best represent the preferences or interactions between users and items.</li>
+<li><strong>Prediction</strong>: For each hotel (user) and channel (item), the model predicts the rating (or preference) using the learned latent factors.</li>
+</ol>
+</blockquote>
+<h2 id="python-script-for-the-recommendation-system">Python Script for the recommendation system</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler
+<span class="hljs-keyword">from</span> sklearn.metrics.pairwise <span class="hljs-keyword">import</span> cosine_similarity
+
+<span class="hljs-keyword">from</span> surprise <span class="hljs-keyword">import</span> SVD, Dataset, Reader
+<span class="hljs-keyword">from</span> surprise.model_selection <span class="hljs-keyword">import</span> train_test_split
+
+<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
+<span class="hljs-keyword">import</span> os
+pd.set_option(<span class="hljs-string">'display.float_format'</span>, <span class="hljs-keyword">lambda</span> x: <span class="hljs-string">'%.0f'</span> % x)
+
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Information about individual channels</span>
+data_lake_prd_314410_cz_canais = pd.read_csv(<span class="hljs-string">'../data/lookups/data-lake-prd-314410.cz.canais.csv'</span>)
+
+<span class="hljs-comment"># List of hotel-channel combinations as of January 2025</span>
+hotel_city_chanel_combin_extract  = pd.read_csv(<span class="hljs-string">'../data/other/hotel_city_chanel_combin_extract.csv'</span>)
+hotel_city_chanel_combin_extract.dropna(inplace=<span class="hljs-literal">True</span>)
+hotel_city_chanel_combin_extract.drop(columns=[<span class="hljs-string">'Cidade_ID'</span>], inplace=<span class="hljs-literal">True</span>)
+hotel_city_chanel_combin_extract.drop_duplicates(inplace=<span class="hljs-literal">True</span>)
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Pivot the table</span>
+pivot_table = hotel_city_chanel_combin_extract.pivot_table(index=<span class="hljs-string">'Hotel_ID'</span>, columns=<span class="hljs-string">'Canal_ID'</span>, aggfunc=<span class="hljs-string">'size'</span>, fill_value=<span class="hljs-number">0</span>)
+<span class="hljs-comment"># Convert the table to binary (1 where the combination existed, 0 otherwise)</span>
+pivot_table = pivot_table.map(<span class="hljs-keyword">lambda</span> x: <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> x &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Count the number of 1s for each column</span>
+counts_per_channel = pivot_table.sum().sort_values(ascending=<span class="hljs-literal">False</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Prepare the data as a squared matrix</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Step 1: Prepare the data matrix</span>
+
+<span class="hljs-comment"># Loops through the rows (hotels) and columns (channels) of the wide matrix above</span>
+<span class="hljs-comment"># Extracts ratings from the DataFrame and stores them as (hotel, channel, rating) tuples</span>
+<span class="hljs-comment"># Creates a new Pandas DataFrame (ratings_df) with three columns:</span>
+<span class="hljs-comment"># -hotel: The identifier of the hotel.</span>
+<span class="hljs-comment"># -channel: The distribution channel (e.g., Expedia, Booking.com, etc.).</span>
+<span class="hljs-comment"># -rating: The rating or score between 0 and 1.</span>
+<span class="hljs-comment"># Prepares the data for the Surprise library. Reader(rating_scale=(0, 1)) tells Surprise that ratings range from 0 to 1.</span>
+<span class="hljs-comment"># Dataset.load_from_df(ratings_df, reader) converts the DataFrame into a Surprise Dataset.</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">prepare_data</span><span class="hljs-params">(df)</span>:</span>
+    ratings = []
+    <span class="hljs-keyword">for</span> hotel <span class="hljs-keyword">in</span> df.index:
+        <span class="hljs-keyword">for</span> channel <span class="hljs-keyword">in</span> df.columns:
+            ratings.append((hotel, channel, df.loc[hotel, channel]))
+
+    ratings_df = pd.DataFrame(ratings, columns=[<span class="hljs-string">'hotel'</span>, <span class="hljs-string">'channel'</span>, <span class="hljs-string">'rating'</span>])
+    reader = Reader(rating_scale=(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>))
+    <span class="hljs-keyword">return</span> Dataset.load_from_df(ratings_df, reader)
+</div></code></pre>
+<blockquote>
+<p>→ Train the model</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Step 2: Train the model</span>
+
+<span class="hljs-comment"># Splits the Data into Training &amp; Test Sets</span>
+<span class="hljs-comment"># model = SVD(n_factors=100, n_epochs=20, lr_all=0.005, reg_all=0.02)</span>
+<span class="hljs-comment"># SVD is a matrix factorization model used in collaborative filtering.</span>
+<span class="hljs-comment">#Parameters:</span>
+<span class="hljs-comment"># n_factors=100 → Number of latent factors (hidden features) in the model.</span>
+<span class="hljs-comment"># n_epochs=20 → Number of training iterations.</span>
+<span class="hljs-comment"># lr_all=0.005 → Learning rate for gradient descent.</span>
+<span class="hljs-comment"># reg_all=0.02 → Regularization term to prevent overfitting.</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train_model</span><span class="hljs-params">(data)</span>:</span>
+    trainset, testset = train_test_split(data, test_size=<span class="hljs-number">0.25</span>, random_state=<span class="hljs-number">42</span>)
+    model = SVD(n_factors=<span class="hljs-number">100</span>, n_epochs=<span class="hljs-number">20</span>, lr_all=<span class="hljs-number">0.005</span>, reg_all=<span class="hljs-number">0.02</span>)
+    model.fit(trainset)
+    <span class="hljs-keyword">return</span> model
+</div></code></pre>
+<blockquote>
+<p>→ Generate recommendations</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Step 3: Generate recommendations</span>
+
+<span class="hljs-comment"># Processes the prediction results from the SVD model and extracts the top N recommendations for each hotel.</span>
+<span class="hljs-comment"># Creates a Dictionary to Store Recommendations</span>
+<span class="hljs-comment"># top_n is a dictionary where:</span>
+<span class="hljs-comment"># -Keys = uid (hotel ID).</span>
+<span class="hljs-comment"># -Values = A list of tuples (iid, est), where:</span>
+<span class="hljs-comment"># -iid = channel ID.</span>
+<span class="hljs-comment"># -est = predicted rating.</span>
+<span class="hljs-comment"># Processes Predictions and Stores Estimated Ratings</span>
+<span class="hljs-comment"># for uid, iid, true_r, est, _ in predictions:</span>
+<span class="hljs-comment">#    top_n[uid].append((iid, est))</span>
+<span class="hljs-comment"># The predictions list contains tuples with:</span>
+<span class="hljs-comment"># -uid: Hotel ID</span>
+<span class="hljs-comment"># -iid: Channel ID</span>
+<span class="hljs-comment"># -true_r: Actual rating (ignored in this function)</span>
+<span class="hljs-comment"># -est: Predicted rating (used for ranking)</span>
+<span class="hljs-comment"># Stores (iid, est) in top_n[uid] for each hotel.</span>
+<span class="hljs-comment"># Sorts Channels by Predicted Rating in Descending Order</span>
+<span class="hljs-comment">#  for uid, user_ratings in top_n.items():</span>
+<span class="hljs-comment">#     user_ratings.sort(key=lambda x: x[1], reverse=True)</span>
+<span class="hljs-comment">#      top_n[uid] = user_ratings[:n]</span>
+<span class="hljs-comment"># Sorts the channels for each hotel based on estimated rating (est).</span>
+<span class="hljs-comment"># Keeps only the top N channels with the highest predicted ratings.</span>
+<span class="hljs-comment"># Returns the Dictionary with Top N Recommendations</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_top_n_recommendations</span><span class="hljs-params">(predictions, n=<span class="hljs-number">5</span>)</span>:</span>
+    top_n = defaultdict(list)
+    <span class="hljs-keyword">for</span> uid, iid, true_r, est, _ <span class="hljs-keyword">in</span> predictions:
+        top_n[uid].append((iid, est))
+
+    <span class="hljs-keyword">for</span> uid, user_ratings <span class="hljs-keyword">in</span> top_n.items():
+        user_ratings.sort(key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">1</span>], reverse=<span class="hljs-literal">True</span>)
+        top_n[uid] = user_ratings[:n]
+
+    <span class="hljs-keyword">return</span> top_n
+</div></code></pre>
+<blockquote>
+<p>→ Get recommendations</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Step 4: Recommend channels</span>
+
+<span class="hljs-comment"># Generates top N recommended channels for a given hotel using a trained SVD model.</span>
+<span class="hljs-comment"># Extracts All Available Channels from the Dataset</span>
+<span class="hljs-comment"># Creates a Test Set for the Given Hotel</span>
+<span class="hljs-comment"># Generates a list of test samples where:</span>
+<span class="hljs-comment"># -hotel_id: The hotel we want recommendations for.</span>
+<span class="hljs-comment"># -iid: Each possible channel.</span>
+<span class="hljs-comment"># -0: A placeholder rating (it will be predicted).</span>
+<span class="hljs-comment"># Uses the SVD model to predict ratings for all channels.</span>
+<span class="hljs-comment"># Returns the Top N Channels for the Hotel</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recommend_channels</span><span class="hljs-params">(hotel_id, model, data, n=<span class="hljs-number">5</span>)</span>:</span>
+    iids = data.df[<span class="hljs-string">'channel'</span>].unique()
+    testset = [(hotel_id, iid, <span class="hljs-number">0</span>) <span class="hljs-keyword">for</span> iid <span class="hljs-keyword">in</span> iids]
+    predictions = model.test(testset)
+    top_n = get_top_n_recommendations(predictions, n)
+    <span class="hljs-keyword">return</span> top_n[hotel_id]
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Main execution</span>
+
+df = pivot_table
+data = prepare_data(df)
+model = train_model(data)
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example usage for 1 hotel</span>
+hotel_id = df.index[<span class="hljs-number">0</span>]  <span class="hljs-comment"># Choose a hotel</span>
+
+recommendations = recommend_channels(hotel_id, model, data, n=<span class="hljs-number">50</span>)
+
+print(<span class="hljs-string">f"Recommended channels for hotel <span class="hljs-subst">{hotel_id:<span class="hljs-number">.0</span>f}</span>:"</span>)
+
+<span class="hljs-keyword">for</span> channel, score <span class="hljs-keyword">in</span> recommendations:
+    print(<span class="hljs-string">f"<span class="hljs-subst">{channel}</span>: <span class="hljs-subst">{score:<span class="hljs-number">.4</span>f}</span>"</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Note: Remove recommendated but already existing channels</p>
+</blockquote>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recommend_channels_exclude_existing</span><span class="hljs-params">(hotel_id, model, data, existing_channels, n=<span class="hljs-number">50</span>)</span>:</span>
+    <span class="hljs-comment"># Get unique channel IDs from the data</span>
+    iids = data.df[<span class="hljs-string">'channel'</span>].unique()
+
+    <span class="hljs-comment"># Generate test set for the given hotel</span>
+    testset = [(hotel_id, iid, <span class="hljs-number">0</span>) <span class="hljs-keyword">for</span> iid <span class="hljs-keyword">in</span> iids]
+
+    <span class="hljs-comment"># Get predictions for the test set</span>
+    predictions = model.test(testset)
+
+    <span class="hljs-comment"># Get top N recommendations</span>
+    top_n = get_top_n_recommendations(predictions, n)
+
+    <span class="hljs-comment"># Get the list of channels that the hotel already has</span>
+    existing_hotel_channels = existing_channels[existing_channels[<span class="hljs-string">'Hotel_ID'</span>] == hotel_id][<span class="hljs-string">'Canal_ID'</span>].values
+
+    <span class="hljs-comment"># Exclude the channels that are already associated with the hotel</span>
+    filtered_recommendations = [rec <span class="hljs-keyword">for</span> rec <span class="hljs-keyword">in</span> top_n[hotel_id] <span class="hljs-keyword">if</span> rec[<span class="hljs-number">0</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> existing_hotel_channels]
+
+    <span class="hljs-keyword">return</span> filtered_recommendations
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Create a dictionary to store the recommendations for each hotel</span>
+recommendations_dict = {}
+
+<span class="hljs-comment"># Loop through each hotel in df and get the top 50 recommended channels</span>
+<span class="hljs-keyword">for</span> hotel_id <span class="hljs-keyword">in</span> df.index:
+    recommendations = recommend_channels_exclude_existing(hotel_id, model, data, hotel_city_chanel_combin_extract, n=<span class="hljs-number">50</span>)
+
+    <span class="hljs-comment"># Store the recommendations in the dictionary</span>
+    recommendations_dict[hotel_id] = recommendations
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pickle
+
+<span class="hljs-comment"># Save the recommendations_dict using pickle</span>
+<span class="hljs-comment"># Pickle serializes (converts) Python objects into a binary format for storage or transfer</span>
+<span class="hljs-comment"># Then deserializes (restores) them back to their original form when needed.</span>
+<span class="hljs-comment"># Serialization (Pickling): The process of converting a Python object into a byte stream (binary data) that can be saved to a file or sent over a network.</span>
+<span class="hljs-comment"># Deserialization (Unpickling): The process of reading a byte stream (binary data) and converting it back into a Python object.</span>
+<span class="hljs-comment"># Pickle uses a binary format to represent Python objects (not human-readable).</span>
+
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">'../out/recommendations_dict.pkl'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> f:
+    pickle.dump(recommendations_dict, f)
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Load the recommendations_dict using pickle</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">'../out/svd_recommendations_dict.pkl'</span>, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> f:
+    loaded_recommendations_dict = pickle.load(f)
+</div></code></pre>
+<blockquote>
+<p>→ Convert the dictionary as a table/csv</p>
+</blockquote>
+<pre class="hljs"><code><div>flattened_data = []
+
+<span class="hljs-keyword">for</span> hotel_id, recommendations <span class="hljs-keyword">in</span> recommendations_dict.items():
+    <span class="hljs-keyword">for</span> channel_ID, score <span class="hljs-keyword">in</span> recommendations:
+        flattened_data.append({
+            <span class="hljs-string">'Hotel_ID'</span>: hotel_id,
+            <span class="hljs-string">'Channel_ID'</span>: channel_ID,
+            <span class="hljs-string">'Score'</span>: score
+        })
+
+
+flattened_data = pd.DataFrame(flattened_data)
+</div></code></pre>
+<pre class="hljs"><code><div>pd.set_option(<span class="hljs-string">'display.float_format'</span>, <span class="hljs-keyword">lambda</span> x: <span class="hljs-string">'%.4f'</span> % x)
+
+flattened_data
+</div></code></pre>
+<pre class="hljs"><code><div>flattened_data[<span class="hljs-string">'Hotel_ID'</span>] = flattened_data[<span class="hljs-string">'Hotel_ID'</span>].astype(int)
+flattened_data.to_csv(<span class="hljs-string">'../out/svd_hotel_channel_recommendations_df_top50.csv'</span>, index=<span class="hljs-literal">False</span>)
+</div></code></pre>
+
+</body>
+</html>
