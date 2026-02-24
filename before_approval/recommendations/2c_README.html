@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3 - README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+  <!-- MathJax for LaTeX rendering -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/javascript">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    }
+  });
+</script>
+
+<style>
+/* Dark GitHub-Themed Styling with More Color Diversity */
+body {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 16px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+
+.embedded-image {
+    max-width: 100%; /* Ensures it never exceeds the container */
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto; /* Centers the image */
+}
+
+h1, h2, h3 {
+    color: #58a6ff;
+    font-weight: bold;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 5px;
+}
+
+a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+code, pre {
+    font-family: "Fira Code", monospace;
+    background-color: #161b22;
+    color: #c9d1d9;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+pre {
+    overflow-x: auto;
+    padding: 15px;
+    border: 1px solid #30363d;
+}
+
+blockquote {
+    background-color: #161b22;
+    border-left: 5px solid #58a6ff;
+    padding: 10px 20px;
+    margin: 10px 0;
+    color: #8b949e;
+}
+
+hr {
+    border: 1px solid #30363d;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #30363d;
+    padding: 10px;
+}
+
+thead {
+    background-color: #161b22;
+}
+
+/* Highlight.js Dark Theme with More Colors */
+.hljs {
+    background: #161b22;
+    color: #c9d1d9;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.hljs-comment, .hljs-quote {
+    color: #8b949e;
+    font-style: italic;
+}
+
+.hljs-keyword, .hljs-selector-tag {
+    color: #ff5555;
+    font-weight: bold;
+}
+
+.hljs-string, .hljs-title, .hljs-section {
+    color: #4ab4f1;
+}
+
+.hljs-number, .hljs-attribute, .hljs-symbol {
+    color: #ff79c6;
+}
+
+.hljs-built_in, .hljs-builtin-name, .hljs-literal {
+    color: #8be9fd;
+}
+
+.hljs-variable, .hljs-template-variable, .hljs-class, .hljs-function {
+    color: #ffb86c;
+}
+
+.hljs-type {
+    color: #ff5555;
+}
+
+.hljs-meta, .hljs-meta-keyword, .hljs-meta-string {
+    color: #f1fa8c;
+}
+
+.hljs-operator {
+    color: #ff79c6;
+}
+
+.hljs-punctuation {
+    color: #c9d1d9;
+}
+
+.hljs-tag {
+    color: #251b90;
+}
+</style>
+</head>
+<body>
+<!-- Your content goes here -->
+</body>
+</html>
+
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="paulo-bastos">Paulo Bastos</h2>
+<h2 id="march-30th-2025">March 30th 2025</h2>
+<h2 id="main-keypoints">Main Keypoints</h2>
+<blockquote>
+<p>This document outlines the strategy for &quot;recommending&quot; new channels to existing hotels using exclusively past and neighboring behaviors (i.e., current hotel-channel combinations for each hotel/channel). As such, this versions does not take into account specific hotel/channel characteristics (e.g., size, price, geography).</p>
+<p>→ <code>code</code> subfolder contains any code scripts, currently all under the <code>bpr_mf_channels_to_hotel.ipynb</code> notebook.</p>
+<p>→ <code>data</code> subfolder contains any <code>input/other</code> data. This consists of a list of all observed hotel-channel combinations requests (ever).</p>
+<p>→ <code>out</code> subfolder contains any <code>output</code> data. In it, the new recommendations for each hotel together with its score at available on the <code>bpr_mf_hotel_channel_recommendations_top50.csv</code> file.</p>
+<p>→ <code>docs</code> subfolder contains any <code>documentation</code> for the present analysis. Start with the respective <code>README.html</code> file.</p>
+</blockquote>
+<blockquote>
+<p>→ We implemented ** Personalized Ranking (BPR)** to suggest <strong>new channels</strong> for hotels. The goal was to identify channels that a hotel was <strong>not yet interacting with</strong>.</p>
+</blockquote>
+<blockquote>
+<p>Bayesian Personalized Ranking (BPR) is a popular recommendation system technique based on <strong>matrix factorization</strong>. It focuses on the <strong>relative ranking</strong> of items for a given user rather than absolute ratings. BPR is especially suitable for <strong>implicit feedback data</strong>, such as clicks, purchases, or views, where explicit ratings (e.g., 1-5 stars) are not available.</p>
+</blockquote>
+<blockquote>
+<h3 id="key-characteristics">Key Characteristics:</h3>
+<ul>
+<li><strong>Implicit feedback</strong>: BPR works on implicit data (e.g., clicks, views, purchases), rather than explicit ratings.</li>
+<li><strong>Pairwise ranking</strong>: It optimizes the system to predict which items are more likely to be preferred by a user, rather than predicting an exact score.</li>
+<li><strong>Matrix factorization</strong>: BPR decomposes the user-item interaction matrix into lower-dimensional matrices to learn user and item latent factors.</li>
+</ul>
+</blockquote>
+<blockquote>
+<h2 id="the-bpr-model">The BPR Model</h2>
+</blockquote>
+<blockquote>
+<p>BPR is based on a <strong>probabilistic</strong> framework and aims to rank items such that more relevant items are ranked higher. The core idea is to model the relative preference between pairs of items, where a user is assumed to prefer one item over another.</p>
+</blockquote>
+<blockquote>
+<h3 id="assumptions">Assumptions:</h3>
+<ul>
+<li>Users (hotels) interact with some subset of items (e.g., channels).</li>
+<li>Each hotel has &quot;preferences&quot; for channels that are not directly observable, but they can be inferred from past interactions.</li>
+<li>For each hotel, the model learns two latent vectors: one for the hotel and one for the channel.</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="objective">Objective:</h3>
+<p>For each hotel (user) <code>u</code> and for each <strong>pair of items</strong> <code>(i, j)</code>, the objective is to maximize the likelihood that the user prefers item <code>i</code> over item <code>j</code>, if the user has interacted with <code>i</code> but not <code>j</code>.</p>
+</blockquote>
+<blockquote>
+<h3 id="matrix-factorization">Matrix Factorization:</h3>
+<p>We assume that the user-item interaction matrix <code>R</code> is sparse, with only some interactions observed. BPR seeks to factorize this matrix into two low-rank matrices:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>User matrix</strong> <code>U</code>: Where the rows are the users, and the columns are the latent factors.</li>
+<li><strong>Item matrix</strong> <code>V</code>: Where the rows are the items, and the columns are the latent factors.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>The latent factor vectors are learned by the algorithm for both users and items in the matrix factorization model.</p>
+</blockquote>
+<blockquote>
+<h2 id="bpr-loss-function">BPR Loss Function</h2>
+</blockquote>
+<blockquote>
+<p>The BPR model uses a <strong>pairwise ranking loss function</strong>. Given a user <code>u</code>, a positively interacted item <code>i</code>, and a negatively interacted item <code>j</code>, the loss function aims to <strong>maximize the difference</strong> between the score for <code>i</code> and <code>j</code>:</p>
+<p>$$
+L_{BPR} = -\sum_{(u, i, j)} \log(\sigma(x_{ui} - x_{uj}))
+$$</p>
+</blockquote>
+<blockquote>
+<p>The goal is to <strong>maximize</strong> the log-likelihood that the user prefers item <code>i</code> over item <code>j</code>.</p>
+</blockquote>
+<blockquote>
+<h3 id="regularization">Regularization:</h3>
+<p>To prevent overfitting, <strong>L2 regularization</strong> is applied to the user and item latent factors to ensure that the model does not assign excessively large values to the latent factors. The regularization term is:</p>
+</blockquote>
+<blockquote>
+<p>$$
+L_{reg} = \lambda \left( | U_u |^2 + | V_i |^2 + | V_j |^2 \right)
+$$</p>
+</blockquote>
+<blockquote>
+<p>Thus, the final loss function to minimize is:</p>
+</blockquote>
+<blockquote>
+<p>$$
+L_{total} = L_{BPR} + L_{reg}
+$$</p>
+</blockquote>
+<blockquote>
+<h2 id="training-the-model">Training the Model</h2>
+</blockquote>
+<blockquote>
+<h3 id="optimization">Optimization:</h3>
+<p>The loss function is minimized using a <strong>stochastic gradient descent (SGD)</strong> approach. For each pair <code>(i, j)</code> of items for each user <code>u</code>, the gradients of the loss function with respect to the latent factors are computed and used to update the factors:</p>
+</blockquote>
+<blockquote>
+<p>$$
+U_u \leftarrow U_u - \eta \frac{\partial L_{total}}{\partial U_u}
+$$</p>
+<p>$$
+V_i \leftarrow V_i - \eta \frac{\partial L_{total}}{\partial V_i}
+$$</p>
+<p>$$
+V_j \leftarrow V_j - \eta \frac{\partial L_{total}}{\partial V_j}
+$$</p>
+</blockquote>
+<blockquote>
+<h3 id="iterations">Iterations:</h3>
+<p>The training continues for a pre-defined number of iterations (e.g., 5000 iterations), and the model converges when &gt;the loss function stops improving.</p>
+</blockquote>
+<blockquote>
+<h2 id="inference-making-recommendations">Inference (Making Recommendations)</h2>
+</blockquote>
+<blockquote>
+<p>After training, to make recommendations for a user <code>u</code>, the model computes the scores for all items based on the learned latent factors:</p>
+</blockquote>
+<blockquote>
+<p>$$
+\hat{r}_{ui} = U_u^T V_i
+$$</p>
+</blockquote>
+<blockquote>
+<p>Then, the top-N items with the highest predicted scores are recommended to the user. These items have the highest likelihood of being preferred by the user.</p>
+</blockquote>
+<h2 id="python-script-for-the-recommendation-system">Python Script for the recommendation system</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
+
+<span class="hljs-keyword">import</span> implicit
+<span class="hljs-keyword">from</span> implicit.bpr <span class="hljs-keyword">import</span> BayesianPersonalizedRanking
+
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Information about individual channels</span>
+data_lake_prd_314410_cz_canais = pd.read_csv(<span class="hljs-string">'../data/lookups/data-lake-prd-314410.cz.canais.csv'</span>)
+
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># List of hotel-channel combinations as of January 2025</span>
+hotel_city_chanel_combin_extract  = pd.read_csv(<span class="hljs-string">'../data/other/hotel_city_chanel_combin_extract.csv'</span>)
+hotel_city_chanel_combin_extract.dropna(inplace=<span class="hljs-literal">True</span>)
+hotel_city_chanel_combin_extract.drop(columns=[<span class="hljs-string">'Cidade_ID'</span>], inplace=<span class="hljs-literal">True</span>)
+hotel_city_chanel_combin_extract.drop_duplicates(inplace=<span class="hljs-literal">True</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Prepare the data as a squared matrix</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Get unique hotel and channel IDs</span>
+hotel_ids = hotel_city_chanel_combin_extract[<span class="hljs-string">"Hotel_ID"</span>].unique()
+channel_ids = hotel_city_chanel_combin_extract[<span class="hljs-string">"Canal_ID"</span>].unique()
+
+<span class="hljs-comment"># Create mappings</span>
+hotel_to_idx = {hotel_id: idx <span class="hljs-keyword">for</span> idx, hotel_id <span class="hljs-keyword">in</span> enumerate(hotel_ids)}
+channel_to_idx = {channel_id: idx <span class="hljs-keyword">for</span> idx, channel_id <span class="hljs-keyword">in</span> enumerate(channel_ids)}
+
+<span class="hljs-comment"># Apply mappings</span>
+hotel_city_chanel_combin_extract[<span class="hljs-string">"hotel_idx"</span>] = hotel_city_chanel_combin_extract[<span class="hljs-string">"Hotel_ID"</span>].map(hotel_to_idx)
+hotel_city_chanel_combin_extract[<span class="hljs-string">"channels_idx"</span>] = hotel_city_chanel_combin_extract[<span class="hljs-string">"Canal_ID"</span>].map(channel_to_idx)
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Create a sparse interaction matrix</span>
+interaction_matrix = coo_matrix((
+    np.ones(len(hotel_city_chanel_combin_extract)),
+    (hotel_city_chanel_combin_extract[<span class="hljs-string">"hotel_idx"</span>], hotel_city_chanel_combin_extract[<span class="hljs-string">"channels_idx"</span>])
+))
+
+
+<span class="hljs-comment"># Convert to CSR format for fast row access (required for BPR)</span>
+interaction_matrix_csr = interaction_matrix.tocsr()
+</div></code></pre>
+<blockquote>
+<p>→ Fit the model</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Convert the matrix to a "positive feedback" format expected by implicit</span>
+
+interaction_matrix_csr = interaction_matrix_csr.astype(<span class="hljs-string">"float32"</span>)
+
+<span class="hljs-comment"># Initialize the BPR model</span>
+model = BayesianPersonalizedRanking(factors=<span class="hljs-number">50</span>, iterations=<span class="hljs-number">5000</span>, regularization=<span class="hljs-number">0.01</span>, learning_rate=<span class="hljs-number">0.001</span>)
+
+<span class="hljs-comment"># Train the model on the interaction matrix</span>
+model.fit(interaction_matrix_csr, show_progress=<span class="hljs-literal">True</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Get recommendations</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example: Get recommendations for a specific hotel (e.g., hotel ID 11334)</span>
+
+hotel_id = <span class="hljs-number">11334</span>
+hotel_index = hotel_to_idx[hotel_id] <span class="hljs-comment"># Convert to matrix index</span>
+
+
+<span class="hljs-comment"># Reshape the matrix to a single row</span>
+user_interaction = interaction_matrix_csr[hotel_index]
+
+
+<span class="hljs-comment"># Generate top 10 channel recommendations</span>
+recommended_channel_indices, scores = model.recommend(hotel_index, user_interaction, N=<span class="hljs-number">50</span>)
+recommended_channel_indices
+</div></code></pre>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># Convert back to original Canal_ID values</span>
+recommended_channels = [channel_ids[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> recommended_channel_indices]
+
+<span class="hljs-comment"># Print results</span>
+print(<span class="hljs-string">f"Top recommended channels for Hotel <span class="hljs-subst">{hotel_id}</span>: <span class="hljs-subst">{recommended_channels}</span>"</span>)
+print(<span class="hljs-string">""</span>)
+print(<span class="hljs-string">f"Corresponding scores: <span class="hljs-subst">{scores}</span>"</span>)
+
+
+</div></code></pre>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># Create a dictionary to store top recommendations for each hotel</span>
+top_recommendations = {}
+
+<span class="hljs-comment"># Loop through all hotels to get recommendations</span>
+<span class="hljs-keyword">for</span> hotel_id <span class="hljs-keyword">in</span> hotel_ids:
+    hotel_index = hotel_to_idx[hotel_id] <span class="hljs-comment"># Convert to matrix index</span>
+
+    <span class="hljs-comment"># Reshape the matrix to a single row</span>
+    user_interaction = interaction_matrix_csr[hotel_index]
+
+    <span class="hljs-comment"># Generate top 50 channel recommendations</span>
+    recommended_channel_indices, scores = model.recommend(hotel_index, user_interaction, N=<span class="hljs-number">50</span>)
+
+    <span class="hljs-comment"># Convert back to original Canal_ID values</span>
+    recommended_channels = [channel_ids[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> recommended_channel_indices]
+
+    <span class="hljs-comment"># Get the channels that the hotel has already interacted with</span>
+    hotel_interacted_channels = hotel_city_chanel_combin_extract[hotel_city_chanel_combin_extract[<span class="hljs-string">"Hotel_ID"</span>] == hotel_id][<span class="hljs-string">"Canal_ID"</span>].values
+
+     <span class="hljs-comment"># Exclude channels the hotel already interacted with</span>
+    filtered_recommended_channels = [
+        channel <span class="hljs-keyword">for</span> channel <span class="hljs-keyword">in</span> recommended_channels <span class="hljs-keyword">if</span> channel <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> hotel_interacted_channels
+    ]
+
+
+    <span class="hljs-comment"># Store the recommendations in the dictionary</span>
+    top_recommendations[hotel_id] = {
+        <span class="hljs-string">'recommended_channels'</span>: filtered_recommended_channels,
+        <span class="hljs-string">'scores'</span>: scores[:len(filtered_recommended_channels)]  <span class="hljs-comment"># Adjust scores to match the filtered list</span>
+    }
+</div></code></pre>
+<pre class="hljs"><code><div>hotel_id_example = <span class="hljs-number">2</span>
+<span class="hljs-keyword">if</span> hotel_id_example <span class="hljs-keyword">in</span> top_recommendations:
+    print(<span class="hljs-string">f"Top recommended channels for Hotel <span class="hljs-subst">{hotel_id_example}</span>:"</span>)
+    print(top_recommendations[hotel_id_example][<span class="hljs-string">'recommended_channels'</span>])
+    print(<span class="hljs-string">""</span>)
+    print(<span class="hljs-string">f"Corresponding scores: <span class="hljs-subst">{top_recommendations[hotel_id_example][<span class="hljs-string">'scores'</span>]}</span>"</span>)
+    print(<span class="hljs-string">""</span>)
+
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">f"No recommendations found for Hotel <span class="hljs-subst">{hotel_id_example}</span>"</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Conver to table/csv</p>
+</blockquote>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># Prepare a list to store the recommendation data</span>
+recommendation_data = []
+
+<span class="hljs-comment"># Loop through the top_recommendations dictionary and flatten the data into rows</span>
+<span class="hljs-keyword">for</span> hotel_id, recommendation <span class="hljs-keyword">in</span> top_recommendations.items():
+    <span class="hljs-keyword">for</span> channel, score <span class="hljs-keyword">in</span> zip(recommendation[<span class="hljs-string">'recommended_channels'</span>], recommendation[<span class="hljs-string">'scores'</span>]):
+        recommendation_data.append({
+            <span class="hljs-string">'Hotel_ID'</span>: hotel_id,
+            <span class="hljs-string">'Recommended_Channel'</span>: channel,
+            <span class="hljs-string">'Score'</span>: score
+        })
+
+<span class="hljs-comment"># Create a DataFrame from the recommendation data</span>
+recommendation_df = pd.DataFrame(recommendation_data)
+</div></code></pre>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># Export the DataFrame to a CSV file</span>
+recommendation_df.to_csv(<span class="hljs-string">'out/bpr_mf_hotel_channel_recommendations_top50.csv'</span>, index=<span class="hljs-literal">False</span>)
+
+</div></code></pre>
+<blockquote>
+<h1 id="notes">Notes</h1>
+<p>Bayesian Personalized Ranking (BPR) recommendations are often quite different from those obtained by Singular Value Decomposition (SVD), and this difference can be traced back to their underlying principles and how they handle the data.</p>
+</blockquote>
+<blockquote>
+<p><strong>1. Objective Function (Optimization Focus)</strong>
+BPR (Bayesian Personalized Ranking) is designed to optimize pairwise ranking of items for each user. It works on implicit feedback and aims to rank items relative to each other. Specifically, BPR tries to maximize the probability that a user prefers an item they have interacted with over one they have not. Mathematically, BPR is based on the logistic loss function that tries to differentiate the scores for items the user has interacted with and those they have not. The goal is relative ranking between items, not absolute ratings.</p>
+</blockquote>
+<blockquote>
+<p>Focus: BPR cares about the ordering of items (which items are better than others) for each user.</p>
+</blockquote>
+<blockquote>
+<p>Data type: Implicit feedback (e.g., binary interactions: clicked vs. not clicked).</p>
+</blockquote>
+<blockquote>
+<p>SVD (Singular Value Decomposition), on the other hand, is a matrix factorization technique that minimizes the reconstruction error between the original matrix and the product of latent factor matrices. SVD is generally used with explicit feedback (e.g., ratings on a scale of 1-5). SVD seeks to find a low-rank approximation of the user-item matrix that minimizes the difference between the actual ratings and the predicted ratings.</p>
+</blockquote>
+<blockquote>
+<p>Focus: SVD tries to predict the absolute rating of an item for a user, not just the ranking of items.</p>
+</blockquote>
+<blockquote>
+<p>Data type: Explicit feedback (e.g., ratings).</p>
+</blockquote>
+<blockquote>
+<p><strong>2. Handling of Implicit vs. Explicit Feedback</strong>
+BPR is specifically tailored for implicit feedback. It is built to work with binary interactions (e.g., did a user interact with an item or not), where there is no direct rating information. BPR models the probability of user preferences based on whether they interacted with an item and treats non-interacted items as implicitly disliked.</p>
+</blockquote>
+<blockquote>
+<p>SVD is generally used for explicit feedback data, where each entry in the matrix represents a rating (e.g., 1 to 5 stars). SVD tries to predict the rating for each user-item pair by decomposing the matrix into latent factors and minimizing the difference between actual ratings and predicted ratings.</p>
+</blockquote>
+<blockquote>
+<p>Since BPR ignores the actual ratings and only cares about the relative preferences between items, it often produces a different set of recommendations than SVD, especially when explicit ratings data is available.</p>
+</blockquote>
+<blockquote>
+<p><strong>3. Latent Factor Representation</strong>
+In BPR, latent factors for both users and items are learned based on relative preference. When a user interacts with item i, the model will try to make the latent factors of i more preferred compared to items the user hasn't interacted with (i.e., item j).</p>
+</blockquote>
+<blockquote>
+<p>The latent factors learned by <strong>BPR</strong> are personalized in terms of preference ranking, and BPR doesn’t necessarily predict a specific &quot;rating&quot; or score for an item.</p>
+</blockquote>
+<blockquote>
+<p><strong>This typically results in recommendations that emphasize diverse or unexpected items</strong> because BPR is less concerned with predicting exact ratings and more focused on ordering preferences.</p>
+</blockquote>
+<blockquote>
+<p>In contrast, <strong>SVD</strong> learns latent factors by trying to reconstruct the original matrix. SVD aims to minimize the difference between predicted ratings and observed ratings, which means that SVD's latent factors are more focused on rating prediction. The <strong>items recommended by SVD tend to be those with the highest predicted ratings.</strong></p>
+</blockquote>
+<blockquote>
+<p>Since SVD tries to approximate user ratings, it typically leads to more conservative recommendations, suggesting items that are similar to those the user has rated highly in the past.</p>
+</blockquote>
+<blockquote>
+<p><strong>4. Recommendation Differences</strong>
+BPR will recommend items that might be more unexpected or novel, as the system tries to find items the user is likely to prefer relative to other items they have not interacted with.</p>
+</blockquote>
+<blockquote>
+<p>SVD will likely recommend items that are similar to the ones the user has previously rated highly, as the model is focused on predicting the exact rating for each item and tends to suggest items that fit within the user’s known preferences.</p>
+</blockquote>
+<blockquote>
+<p><strong>5. Bias Toward Popularity (SVD)</strong> &gt;<strong>SVD may tend to recommend more popular items</strong>, as those items tend to have the most data points and are therefore more easily predicted. If the user has rated items that are similar to popular ones, SVD will likely suggest those popular items.</p>
+</blockquote>
+<blockquote>
+<p><strong>BPR</strong>, on the other hand, is not directly biased toward popularity, since it <strong>cares more about individual user preferences and the ranking of items for each user</strong>. As a result, BPR can sometimes recommend more niche or less popular items that the user may not have previously encountered.</p>
+</blockquote>
+<blockquote>
+<p><strong>Why the Difference in Recommendations?</strong></p>
+</blockquote>
+<blockquote>
+<p>BPR focuses on ranking items for a user based on previous interactions, which often leads to more exploratory recommendations (i.e., items the user might not have previously considered but would potentially like).
+SVD is focused on reconstructing ratings and may often suggest items that are similar to those the user has rated highly in the past. This can lead to more predictable or conservative recommendations.</p>
+</blockquote>
+<blockquote>
+<p>Exploration vs. Exploitation: In practice, systems that balance exploration (discovering new items via BPR) and exploitation (recommending top-rated items via SVD) are often more successful in providing a diverse yet relevant recommendation list.</p>
+</blockquote>
+<blockquote>
+<p><strong>Conclusion</strong></p>
+</blockquote>
+<blockquote>
+<p>The fundamental difference between BPR and SVD lies in their objective functions—BPR is focused on relative ranking based on implicit feedback, while SVD is focused on rating prediction based on explicit feedback. This results in BPR often suggesting novel and diverse items, while SVD tends to suggest popular and similar items based on a user’s past ratings. We suggest that, when in doubt, SVD suggestions should be prioritised.</p>
+</blockquote>
+
+</body>
+</html>
