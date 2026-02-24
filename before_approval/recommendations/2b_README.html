@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3 - README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+  <!-- MathJax for LaTeX rendering -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/javascript">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    }
+  });
+</script>
+
+<style>
+/* Dark GitHub-Themed Styling with More Color Diversity */
+body {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 16px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+
+.embedded-image {
+    max-width: 100%; /* Ensures it never exceeds the container */
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto; /* Centers the image */
+}
+
+h1, h2, h3 {
+    color: #58a6ff;
+    font-weight: bold;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 5px;
+}
+
+a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+code, pre {
+    font-family: "Fira Code", monospace;
+    background-color: #161b22;
+    color: #c9d1d9;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+pre {
+    overflow-x: auto;
+    padding: 15px;
+    border: 1px solid #30363d;
+}
+
+blockquote {
+    background-color: #161b22;
+    border-left: 5px solid #58a6ff;
+    padding: 10px 20px;
+    margin: 10px 0;
+    color: #8b949e;
+}
+
+hr {
+    border: 1px solid #30363d;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #30363d;
+    padding: 10px;
+}
+
+thead {
+    background-color: #161b22;
+}
+
+/* Highlight.js Dark Theme with More Colors */
+.hljs {
+    background: #161b22;
+    color: #c9d1d9;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.hljs-comment, .hljs-quote {
+    color: #8b949e;
+    font-style: italic;
+}
+
+.hljs-keyword, .hljs-selector-tag {
+    color: #ff5555;
+    font-weight: bold;
+}
+
+.hljs-string, .hljs-title, .hljs-section {
+    color: #4ab4f1;
+}
+
+.hljs-number, .hljs-attribute, .hljs-symbol {
+    color: #ff79c6;
+}
+
+.hljs-built_in, .hljs-builtin-name, .hljs-literal {
+    color: #8be9fd;
+}
+
+.hljs-variable, .hljs-template-variable, .hljs-class, .hljs-function {
+    color: #ffb86c;
+}
+
+.hljs-type {
+    color: #ff5555;
+}
+
+.hljs-meta, .hljs-meta-keyword, .hljs-meta-string {
+    color: #f1fa8c;
+}
+
+.hljs-operator {
+    color: #ff79c6;
+}
+
+.hljs-punctuation {
+    color: #c9d1d9;
+}
+
+.hljs-tag {
+    color: #251b90;
+}
+</style>
+</head>
+<body>
+<!-- Your content goes here -->
+</body>
+</html>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="paulo-bastos">Paulo Bastos</h2>
+<h2 id="march-30th-2025">March 30th 2025</h2>
+<h2 id="main-keypoints">Main Keypoints</h2>
+<blockquote>
+<p>This document outlines the strategy for &quot;recommending&quot; new channels to existing hotels using exclusively past and neighboring behaviors (i.e., current hotel-channel combinations for each hotel/channel). As such, this versions does not take into account specific hotel/channel characteristics (e.g., size, price, geography).</p>
+<p>→ <code>code</code> subfolder contains any code scripts, currently all under the <code>autoencoder_channels_to_hotel.ipynb</code> notebook.</p>
+<p>→ <code>data</code> subfolder contains any <code>input/other</code> data. This consists of a list of all observed hotel-channel combinations requests (ever).</p>
+<p>→ <code>out</code> subfolder contains any <code>output</code> data. In it, the new recommendations for each hotel together with its score at available on the <code>autoencoder_hotel_channel_recommendations_top50.csv</code> file.</p>
+<p>→ <code>docs</code> subfolder contains any <code>documentation</code> for the present analysis. Start with the respective <code>README.html</code> file.</p>
+</blockquote>
+<blockquote>
+<p>→ We implemented <strong>Autoencoders</strong> to suggest <strong>new channels</strong> for hotels. The goal was to identify channels that a hotel was <strong>not yet interacting with</strong>.</p>
+</blockquote>
+<blockquote>
+<p>Autoencoders are neural networks that are trained to reconstruct their input data. They are especially powerful for tasks such as dimensionality reduction, anomaly detection, and recommendation systems.</p>
+</blockquote>
+<blockquote>
+<p>In the context of collaborative filtering, Autoencoders can:</p>
+<ul>
+<li>Learn a <strong>low-dimensional representation</strong> of users and items (hotels and channels) in the hidden layers.</li>
+<li>Reconstruct the interactions between users (hotels) and items (channels), allowing us to predict the interactions that have not been seen before.</li>
+<li>Provide recommendations based on these reconstructions.</li>
+</ul>
+<p>Autoencoders help in capturing <strong>non-linear patterns</strong> in the data, which may not be possible with simpler linear models like SVD.</p>
+</blockquote>
+<blockquote>
+<h3 id="how-autoencoders-work">How Autoencoders Work</h3>
+<p>An Autoencoder is composed of two main components:</p>
+<ol>
+<li><strong>Encoder</strong>: This part compresses the input data into a lower-dimensional space (also known as the bottleneck layer or latent space).</li>
+<li><strong>Decoder</strong>: This part reconstructs the input data from the compressed representation produced by the encoder.</li>
+</ol>
+<p>The architecture can be visualized as follows:</p>
+<p>$$
+\text{Input Data} \xrightarrow{\text{Encoder}} \text{Latent Representation} \xrightarrow{\text{Decoder}} \text{Reconstructed Data}
+$$</p>
+<p>The goal of training an Autoencoder is to minimize the difference between the <strong>input data</strong> and the <strong>reconstructed data</strong>. This is achieved through <strong>backpropagation</strong> and an optimization process (e.g., Adam optimizer) using a loss function (e.g., Mean Squared Error).</p>
+</blockquote>
+<blockquote>
+<h3 id="mathematical-formulation">Mathematical Formulation</h3>
+<p>The objective of the Autoencoder is to learn an encoding function that maps the input data to a lower-dimensional space, and a decoding function that maps the latent representation back to the original space.</p>
+<p>The Autoencoder is trained by minimizing the <strong>reconstruction error</strong>:</p>
+<p>$$
+\mathcal{L}(X, \hat{X}) = \frac{1}{m} \sum_{i=1}^{m} | X_i - \hat{X}_i |_2^2
+$$</p>
+<p>The loss function is optimized to minimize the difference between the original and reconstructed data, ensuring that the model captures the patterns in the data.</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<h3 id="model-architecture">Model Architecture</h3>
+</blockquote>
+<h3 id="encoder">Encoder</h3>
+<p>The <strong>encoder</strong> is a neural network that compresses the input data into a latent representation. In our case, the input data is a one-hot encoded vector representing the interactions of a hotel with all available channels. The encoder has two layers:</p>
+<ul>
+<li>A fully connected layer that reduces the dimensionality from the input size (number of channels) to a smaller hidden dimension.</li>
+<li>Another fully connected layer that reduces the representation further to half of the previous hidden size, providing a compact latent space.</li>
+</ul>
+<p>Mathematically, the encoder function is defined as:</p>
+<p>$$
+\mathbf{h} = f(\mathbf{W}_1 \mathbf{x} + \mathbf{b}_1)
+$$</p>
+</blockquote>
+<blockquote>
+<h3 id="decoder">Decoder</h3>
+<p>The <strong>decoder</strong> reconstructs the input data from the latent representation. It consists of two fully connected layers:</p>
+<ul>
+<li>The first layer expands the latent space back to a larger dimension.</li>
+<li>The second layer reconstructs the original data.</li>
+</ul>
+<p>Mathematically, the decoder function is defined as:</p>
+<p>$$
+\hat{\mathbf{x}} = g(\mathbf{W}_2 \mathbf{h} + \mathbf{b}_2)
+$$</p>
+</blockquote>
+<blockquote>
+<h3 id="training">Training</h3>
+<p>The model is trained by feeding in the input interaction matrix (hotel-channel interaction data), which consists of binary values: 1 if a hotel has interacted with a channel, and 0 if not. The network tries to predict the missing values in the interaction matrix (i.e., recommending new channels).</p>
+<p>The training objective is to minimize the <strong>Mean Squared Error</strong> (MSE) between the original input and the reconstructed data. Once trained, the model can be used to predict the interaction matrix for hotels and generate recommendations based on the predicted values.</p>
+</blockquote>
+<h2 id="python-script-for-the-recommendation-system">Python Script for the recommendation system</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> os
+
+
+<span class="hljs-comment"># Importing the data</span>
+
+<span class="hljs-comment"># Information about individual channels</span>
+data_lake_prd_314410_cz_canais = pd.read_csv(<span class="hljs-string">'../data/lookups/data-lake-prd-314410.cz.canais.csv'</span>)
+
+<span class="hljs-comment"># List of hotel-channel combinations as of January 2025</span>
+hotel_city_chanel_combin_extract  = pd.read_csv(<span class="hljs-string">'../data/other/hotel_city_chanel_combin_extract.csv'</span>)
+hotel_city_chanel_combin_extract.dropna(inplace=<span class="hljs-literal">True</span>)
+hotel_city_chanel_combin_extract.drop(columns=[<span class="hljs-string">'Cidade_ID'</span>], inplace=<span class="hljs-literal">True</span>)
+hotel_city_chanel_combin_extract.drop_duplicates(inplace=<span class="hljs-literal">True</span>)
+
+</div></code></pre>
+<blockquote>
+<p><strong>NOTE</strong>: The code below is for installing PyTorch with our specific GPU support</p>
+<p>Needs to be addapted on a different environment</p>
+<p>-Cuda compilation tools, release 12.5, V12.5.40</p>
+<p>-Build cuda_12.5.r12.5/compiler.34177558_0</p>
+<p>pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> torch
+
+print(torch.__version__)  <span class="hljs-comment"># Check PyTorch version</span>
+print(torch.cuda.is_available())  <span class="hljs-comment"># Should return True if GPU is detected</span>
+print(torch.cuda.get_device_name(<span class="hljs-number">0</span>))  <span class="hljs-comment"># Should print your GPU model</span>
+
+<span class="hljs-comment">#2.5.1+cu121</span>
+<span class="hljs-comment">#True</span>
+<span class="hljs-comment">#NVIDIA RTX A2000 Laptop GPU</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn
+<span class="hljs-keyword">import</span> torch.optim <span class="hljs-keyword">as</span> optim
+
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> DataLoader, TensorDataset
+</div></code></pre>
+<blockquote>
+<p>→ Prepare the data as a squared matrix</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Copy the dataset (long form list of hotels-channels combinations) to a new DataFrame</span>
+df = hotel_city_chanel_combin_extract.copy()
+
+<span class="hljs-comment"># Map Hotel_IDs and Channel_IDs to integer indices</span>
+hotel_ids = df[<span class="hljs-string">"Hotel_ID"</span>].unique()
+channel_ids = df[<span class="hljs-string">"Canal_ID"</span>].unique()
+
+hotel_to_idx = {hotel: i <span class="hljs-keyword">for</span> i, hotel <span class="hljs-keyword">in</span> enumerate(hotel_ids)}
+channel_to_idx = {channel: i <span class="hljs-keyword">for</span> i, channel <span class="hljs-keyword">in</span> enumerate(channel_ids)}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Create interaction matrix (hotels × channels)</span>
+num_hotels = len(hotel_ids)
+num_channels = len(channel_ids)
+interaction_matrix = np.zeros((num_hotels, num_channels)) <span class="hljs-comment"># hotel rows x channel columns</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># interaction_matrix</span>
+<span class="hljs-keyword">for</span> _, row <span class="hljs-keyword">in</span> df.iterrows():
+    h_idx = hotel_to_idx[row[<span class="hljs-string">"Hotel_ID"</span>]]
+    c_idx = channel_to_idx[row[<span class="hljs-string">"Canal_ID"</span>]]
+    interaction_matrix[h_idx, c_idx] = <span class="hljs-number">1</span>
+</div></code></pre>
+<blockquote>
+<p>→ Split into train &amp; test</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Split into train &amp; test</span>
+train_data, test_data = train_test_split(interaction_matrix, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># Convert to PyTorch tensors</span>
+train_tensor = torch.FloatTensor(train_data)
+test_tensor = torch.FloatTensor(test_data)
+
+train_loader = DataLoader(TensorDataset(train_tensor), batch_size=<span class="hljs-number">64</span>, shuffle=<span class="hljs-literal">True</span>)
+test_loader = DataLoader(TensorDataset(test_tensor), batch_size=<span class="hljs-number">64</span>, shuffle=<span class="hljs-literal">True</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Define the Autoencoder</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Define the Autoencoder</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Autoencoder</span><span class="hljs-params">(nn.Module)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, input_dim, hidden_dim=<span class="hljs-number">128</span>)</span>:</span>
+
+        super(Autoencoder, self).__init__()
+
+        self.encoder = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim // <span class="hljs-number">2</span>),
+            nn.ReLU(),
+        )
+
+        self.decoder = nn.Sequential(
+            nn.Linear(hidden_dim // <span class="hljs-number">2</span>, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, input_dim),
+            nn.Sigmoid() <span class="hljs-comment"># Outputs between 0 and 1</span>
+        )
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, x)</span>:</span>
+        encoded = self.encoder(x)
+        decoded = self.decoder(encoded)
+        <span class="hljs-keyword">return</span> decoded
+
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># initialize the model</span>
+input_dim = num_channels <span class="hljs-comment"># Each row is a hotel, so input_dim = number of channels ("columns")</span>
+autoencoder = Autoencoder(input_dim)
+</div></code></pre>
+<pre class="hljs"><code><div>autoencoder
+
+<span class="hljs-string">'''
+Autoencoder(
+  (encoder): Sequential(
+    (0): Linear(in_features=732, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=64, bias=True)
+    (3): ReLU()
+  )
+  (decoder): Sequential(
+    (0): Linear(in_features=64, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=732, bias=True)
+    (3): Sigmoid()
+  )
+)
+'''</span>
+</div></code></pre>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># Loss function &amp; optimizer</span>
+criterion = nn.MSELoss()
+optimizer = optim.Adam(autoencoder.parameters(), lr=<span class="hljs-number">0.001</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Train the Autoencoder</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Train the Autoencoder</span>
+epochs = <span class="hljs-number">200</span>
+<span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> range(epochs):
+    autoencoder.train()
+    total_loss = <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> train_loader:
+        optimizer.zero_grad()
+        inputs = batch[<span class="hljs-number">0</span>]  <span class="hljs-comment"># Extract input tensor</span>
+        outputs = autoencoder(inputs)  <span class="hljs-comment"># Forward pass</span>
+        loss = criterion(outputs, inputs)  <span class="hljs-comment"># Compute loss</span>
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+
+    print(<span class="hljs-string">f"Epoch <span class="hljs-subst">{epoch+<span class="hljs-number">1</span>}</span>/<span class="hljs-subst">{epochs}</span>, Loss: <span class="hljs-subst">{total_loss:<span class="hljs-number">.4</span>f}</span>"</span>)
+</div></code></pre>
+<blockquote>
+<p>→ Generate recommendations</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Generate recommendations</span>
+autoencoder.eval()
+hotel_recommendations = {}
+
+<span class="hljs-keyword">with</span> torch.no_grad():
+    reconstructed = autoencoder(torch.FloatTensor(interaction_matrix)).numpy()
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> hotel_idx, scores <span class="hljs-keyword">in</span> enumerate(reconstructed):
+    sorted_channels = np.argsort(scores)[::<span class="hljs-number">-1</span>]  <span class="hljs-comment"># Sort channels by predicted score (descending)</span>
+    recommended_channels = [channel_ids[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> sorted_channels[:<span class="hljs-number">50</span>]]  <span class="hljs-comment"># Top 50 channels</span>
+    hotel_recommendations[hotel_ids[hotel_idx]] = recommended_channels
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Show recommendations for a few hotels</span>
+<span class="hljs-keyword">for</span> hotel, recs <span class="hljs-keyword">in</span> list(hotel_recommendations.items())[:<span class="hljs-number">5</span>]:
+    print(<span class="hljs-string">f"Hotel <span class="hljs-subst">{hotel}</span> -&gt; Recommended Channels: <span class="hljs-subst">{recs}</span>"</span>)
+</div></code></pre>
+<pre class="hljs"><code><div>Hotel <span class="hljs-number">11332.0</span> -&gt; Recommended Channels: [<span class="hljs-number">791</span>, <span class="hljs-number">248</span>, <span class="hljs-number">76</span>, <span class="hljs-number">315</span>, <span class="hljs-number">231</span>, <span class="hljs-number">1145</span>, <span class="hljs-number">889</span>, <span class="hljs-number">729</span>, <span class="hljs-number">481</span>, <span class="hljs-number">221</span>, <span class="hljs-number">390</span>, <span class="hljs-number">1351</span>, <span class="hljs-number">1199</span>, <span class="hljs-number">256</span>, <span class="hljs-number">1049</span>, <span class="hljs-number">976</span>, <span class="hljs-number">252</span>, <span class="hljs-number">136</span>, <span class="hljs-number">1195</span>, <span class="hljs-number">128</span>, <span class="hljs-number">385</span>, <span class="hljs-number">646</span>, <span class="hljs-number">1102</span>, <span class="hljs-number">1136</span>, <span class="hljs-number">1008</span>, <span class="hljs-number">970</span>, <span class="hljs-number">775</span>, <span class="hljs-number">937</span>, <span class="hljs-number">712</span>, <span class="hljs-number">901</span>, <span class="hljs-number">1020</span>, <span class="hljs-number">1055</span>, <span class="hljs-number">929</span>, <span class="hljs-number">122</span>, <span class="hljs-number">763</span>, <span class="hljs-number">269</span>, <span class="hljs-number">921</span>, <span class="hljs-number">463</span>, <span class="hljs-number">378</span>, <span class="hljs-number">641</span>, <span class="hljs-number">1360</span>, <span class="hljs-number">1306</span>, <span class="hljs-number">340</span>, <span class="hljs-number">292</span>, <span class="hljs-number">1254</span>, <span class="hljs-number">554</span>, <span class="hljs-number">367</span>, <span class="hljs-number">940</span>, <span class="hljs-number">170</span>, <span class="hljs-number">89</span>]
+Hotel <span class="hljs-number">16573.0</span> -&gt; Recommended Channels: [<span class="hljs-number">76</span>, <span class="hljs-number">124</span>, <span class="hljs-number">89</span>, <span class="hljs-number">270</span>, <span class="hljs-number">414</span>, <span class="hljs-number">763</span>, <span class="hljs-number">104</span>, <span class="hljs-number">223</span>, <span class="hljs-number">1248</span>, <span class="hljs-number">459</span>, <span class="hljs-number">1234</span>, <span class="hljs-number">972</span>, <span class="hljs-number">385</span>, <span class="hljs-number">699</span>, <span class="hljs-number">597</span>, <span class="hljs-number">942</span>, <span class="hljs-number">269</span>, <span class="hljs-number">1008</span>, <span class="hljs-number">1144</span>, <span class="hljs-number">494</span>, <span class="hljs-number">122</span>, <span class="hljs-number">689</span>, <span class="hljs-number">820</span>, <span class="hljs-number">1343</span>, <span class="hljs-number">1262</span>, <span class="hljs-number">1167</span>, <span class="hljs-number">865</span>, <span class="hljs-number">951</span>, <span class="hljs-number">1223</span>, <span class="hljs-number">162</span>, <span class="hljs-number">258</span>, <span class="hljs-number">684</span>, <span class="hljs-number">940</span>, <span class="hljs-number">126</span>, <span class="hljs-number">905</span>, <span class="hljs-number">369</span>, <span class="hljs-number">1046</span>, <span class="hljs-number">175</span>, <span class="hljs-number">987</span>, <span class="hljs-number">1138</span>, <span class="hljs-number">992</span>, <span class="hljs-number">964</span>, <span class="hljs-number">1055</span>, <span class="hljs-number">598</span>, <span class="hljs-number">1199</span>, <span class="hljs-number">921</span>, <span class="hljs-number">1141</span>, <span class="hljs-number">578</span>, <span class="hljs-number">418</span>, <span class="hljs-number">1034</span>]
+Hotel <span class="hljs-number">12517.0</span> -&gt; Recommended Channels: [<span class="hljs-number">1181</span>, <span class="hljs-number">672</span>, <span class="hljs-number">791</span>, <span class="hljs-number">1249</span>, <span class="hljs-number">646</span>, <span class="hljs-number">125</span>, <span class="hljs-number">231</span>, <span class="hljs-number">1234</span>, <span class="hljs-number">1108</span>, <span class="hljs-number">763</span>, <span class="hljs-number">89</span>, <span class="hljs-number">805</span>, <span class="hljs-number">1269</span>, <span class="hljs-number">595</span>, <span class="hljs-number">1210</span>, <span class="hljs-number">142</span>, <span class="hljs-number">1343</span>, <span class="hljs-number">175</span>, <span class="hljs-number">689</span>, <span class="hljs-number">277</span>, <span class="hljs-number">676</span>, <span class="hljs-number">87</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">1099</span>, <span class="hljs-number">1360</span>, <span class="hljs-number">921</span>, <span class="hljs-number">369</span>, <span class="hljs-number">115</span>, <span class="hljs-number">986</span>, <span class="hljs-number">386</span>, <span class="hljs-number">122</span>, <span class="hljs-number">426</span>, <span class="hljs-number">30</span>, <span class="hljs-number">607</span>, <span class="hljs-number">157</span>, <span class="hljs-number">820</span>, <span class="hljs-number">1070</span>, <span class="hljs-number">269</span>, <span class="hljs-number">1093</span>, <span class="hljs-number">126</span>, <span class="hljs-number">1167</span>, <span class="hljs-number">1313</span>, <span class="hljs-number">1024</span>, <span class="hljs-number">475</span>, <span class="hljs-number">314</span>, <span class="hljs-number">684</span>, <span class="hljs-number">1165</span>, <span class="hljs-number">727</span>, <span class="hljs-number">783</span>, <span class="hljs-number">641</span>]
+Hotel <span class="hljs-number">5882.0</span> -&gt; Recommended Channels: [<span class="hljs-number">418</span>, <span class="hljs-number">1249</span>, <span class="hljs-number">396</span>, <span class="hljs-number">810</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1055</span>, <span class="hljs-number">689</span>, <span class="hljs-number">627</span>, <span class="hljs-number">558</span>, <span class="hljs-number">994</span>, <span class="hljs-number">390</span>, <span class="hljs-number">964</span>, <span class="hljs-number">672</span>, <span class="hljs-number">1181</span>, <span class="hljs-number">974</span>, <span class="hljs-number">1273</span>, <span class="hljs-number">119</span>, <span class="hljs-number">385</span>, <span class="hljs-number">903</span>, <span class="hljs-number">125</span>, <span class="hljs-number">1008</span>, <span class="hljs-number">258</span>, <span class="hljs-number">684</span>, <span class="hljs-number">463</span>, <span class="hljs-number">838</span>, <span class="hljs-number">458</span>, <span class="hljs-number">527</span>, <span class="hljs-number">937</span>, <span class="hljs-number">122</span>, <span class="hljs-number">353</span>, <span class="hljs-number">987</span>, <span class="hljs-number">1349</span>, <span class="hljs-number">169</span>, <span class="hljs-number">172</span>, <span class="hljs-number">1138</span>, <span class="hljs-number">126</span>, <span class="hljs-number">763</span>, <span class="hljs-number">483</span>, <span class="hljs-number">905</span>, <span class="hljs-number">223</span>, <span class="hljs-number">791</span>, <span class="hljs-number">626</span>, <span class="hljs-number">1021</span>, <span class="hljs-number">554</span>, <span class="hljs-number">317</span>, <span class="hljs-number">921</span>, <span class="hljs-number">1360</span>, <span class="hljs-number">269</span>, <span class="hljs-number">969</span>, <span class="hljs-number">1248</span>]
+Hotel <span class="hljs-number">5124.0</span> -&gt; Recommended Channels: [<span class="hljs-number">136</span>, <span class="hljs-number">92</span>, <span class="hljs-number">1168</span>, <span class="hljs-number">1160</span>, <span class="hljs-number">1034</span>, <span class="hljs-number">964</span>, <span class="hljs-number">1056</span>, <span class="hljs-number">1024</span>, <span class="hljs-number">1099</span>, <span class="hljs-number">677</span>, <span class="hljs-number">1234</span>, <span class="hljs-number">1325</span>, <span class="hljs-number">1351</span>, <span class="hljs-number">358</span>, <span class="hljs-number">1063</span>, <span class="hljs-number">994</span>, <span class="hljs-number">1108</span>, <span class="hljs-number">1273</span>, <span class="hljs-number">10</span>, <span class="hljs-number">812</span>, <span class="hljs-number">914</span>, <span class="hljs-number">865</span>, <span class="hljs-number">1322</span>, <span class="hljs-number">1017</span>, <span class="hljs-number">175</span>, <span class="hljs-number">1199</span>, <span class="hljs-number">1197</span>, <span class="hljs-number">532</span>, <span class="hljs-number">1305</span>, <span class="hljs-number">659</span>, <span class="hljs-number">1144</span>, <span class="hljs-number">905</span>, <span class="hljs-number">71</span>, <span class="hljs-number">1346</span>, <span class="hljs-number">608</span>, <span class="hljs-number">369</span>, <span class="hljs-number">248</span>, <span class="hljs-number">641</span>, <span class="hljs-number">1248</span>, <span class="hljs-number">1008</span>, <span class="hljs-number">1360</span>, <span class="hljs-number">256</span>, <span class="hljs-number">131</span>, <span class="hljs-number">904</span>, <span class="hljs-number">805</span>, <span class="hljs-number">919</span>, <span class="hljs-number">597</span>, <span class="hljs-number">976</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">284</span>]
+</div></code></pre>
+<pre class="hljs"><code><div>hotel_recommendations.get(<span class="hljs-number">16573.0</span>, [])
+</div></code></pre>
+<pre class="hljs"><code><div>hotel_recommendations
+</div></code></pre>
+<blockquote>
+<p>→ Convert dictionary to table/csv and exclude existing channels</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Convert dictionary to DataFrame</span>
+df_recommendations = pd.DataFrame(
+    [(hotel, channel) <span class="hljs-keyword">for</span> hotel, channels <span class="hljs-keyword">in</span> hotel_recommendations.items() <span class="hljs-keyword">for</span> channel <span class="hljs-keyword">in</span> channels],
+    columns=[<span class="hljs-string">'Hotel_ID'</span>, <span class="hljs-string">'Channel_ID'</span>]
+)
+
+</div></code></pre>
+<pre class="hljs"><code><div>df_recommendations[<span class="hljs-string">"Hotel_ID"</span>] = df_recommendations[<span class="hljs-string">"Hotel_ID"</span>].astype(int)
+</div></code></pre>
+<pre class="hljs"><code><div>existing_channels = hotel_city_chanel_combin_extract.groupby(<span class="hljs-string">"Hotel_ID"</span>)[<span class="hljs-string">"Canal_ID"</span>].apply(set).to_dict()
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Filter out already existing channels</span>
+filtered_recommendations = {
+    hotel: [channel <span class="hljs-keyword">for</span> channel <span class="hljs-keyword">in</span> channels <span class="hljs-keyword">if</span> channel <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> existing_channels.get(hotel, set())]
+    <span class="hljs-keyword">for</span> hotel, channels <span class="hljs-keyword">in</span> hotel_recommendations.items()
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># Convert to DataFrame</span>
+df_filtered_recommendations = pd.DataFrame([
+    (hotel, channel) <span class="hljs-keyword">for</span> hotel, channels <span class="hljs-keyword">in</span> filtered_recommendations.items() <span class="hljs-keyword">for</span> channel <span class="hljs-keyword">in</span> channels
+], columns=[<span class="hljs-string">"Hotel_ID"</span>, <span class="hljs-string">"Recommended_Channel"</span>])
+
+df_filtered_recommendations
+</div></code></pre>
+<pre class="hljs"><code><div>df_filtered_recommendations.to_csv(<span class="hljs-string">"../out/autoencoder_hotel_channel_recommendations_top50.csv"</span>, index=<span class="hljs-literal">False</span>)
+</div></code></pre>
+<blockquote>
+<h2 id="sanity-check">Sanity check</h2>
+<p>Check if &quot;similar&quot; hotels are getting &quot;similar&quot; recommendations.</p>
+<p>It turns out that using Autoencoders this is not the case.</p>
+<p><strong>NOTE:</strong> Autoencoders compress the hotel-channel interaction matrix into a lower-dimensional latent space (encoder), to reconstruct the interaction matrix from that latent representation (decoder) and to minimize reconstruction error.</p>
+<p>This means that Autoencoders learn to &quot;rebuild&quot; the original matrix rather than directly capturing high-variance structures (as SVD does).</p>
+<ul>
+<li>In SVD, hotels with similar interaction patterns tend to get similar recommendations, because the singular vectors capture global patterns in the data.</li>
+<li>In Autoencoders, the learned latent space might not be structured in the same way, so similar hotels might have very different activations in the bottleneck layer.</li>
+</ul>
+<p>As such, we prefer to exploy methologies for capturing high-variance structures.</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># Ensure model is in evaluation mode</span>
+autoencoder.eval()
+
+<span class="hljs-comment"># Pass the full dataset through the encoder to get latent features</span>
+<span class="hljs-keyword">with</span> torch.no_grad():
+    encoded_hotels = autoencoder.encoder(torch.FloatTensor(interaction_matrix)).numpy()  <span class="hljs-comment"># Extract the encoded representation</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> sklearn.metrics.pairwise <span class="hljs-keyword">import</span> cosine_similarity
+
+<span class="hljs-comment"># Compute similarity between hotels based on their latent representations</span>
+similarity_matrix = cosine_similarity(encoded_hotels)
+
+<span class="hljs-comment"># Get the most similar hotels for a given hotel</span>
+hotel_id = <span class="hljs-number">11332</span>  <span class="hljs-comment"># Example hotel</span>
+
+<span class="hljs-keyword">if</span> hotel_id <span class="hljs-keyword">in</span> hotel_to_idx:  <span class="hljs-comment"># Ensure the hotel exists in our mapping</span>
+    similar_hotels = similarity_matrix[hotel_to_idx[hotel_id]].argsort()[<span class="hljs-number">-10</span>:][::<span class="hljs-number">-1</span>]
+    print(<span class="hljs-string">"Most similar hotels:"</span>, similar_hotels)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">f"Hotel ID <span class="hljs-subst">{hotel_id}</span> not found in hotel_to_idx."</span>)
+</div></code></pre>
+<pre class="hljs"><code><div>
+<span class="hljs-comment"># Get the channel IDs for each hotel</span>
+channels_hotel_11332 = set(df_filtered_recommendations[df_filtered_recommendations[<span class="hljs-string">"Hotel_ID"</span>] == <span class="hljs-number">11332</span>][<span class="hljs-string">"Recommended_Channel"</span>])
+channels_hotel_13558 = set(df_filtered_recommendations[df_filtered_recommendations[<span class="hljs-string">"Hotel_ID"</span>] == <span class="hljs-number">13558</span>][<span class="hljs-string">"Recommended_Channel"</span>])
+
+<span class="hljs-comment"># Compute the intersection of the two sets (overlap)</span>
+overlap_channels = channels_hotel_11332.intersection(channels_hotel_13558)
+
+<span class="hljs-comment"># Output the results</span>
+print(<span class="hljs-string">f"Channels for Hotel 11332: <span class="hljs-subst">{channels_hotel_11332}</span>"</span>)
+print(<span class="hljs-string">f"Channels for Hotel 13558: <span class="hljs-subst">{channels_hotel_13558}</span>"</span>)
+print(<span class="hljs-string">f"Overlap Channels: <span class="hljs-subst">{overlap_channels}</span>"</span>)
+</div></code></pre>
+<pre class="hljs"><code><div>Channels <span class="hljs-keyword">for</span> Hotel <span class="hljs-number">11332</span>: {<span class="hljs-number">641</span>, <span class="hljs-number">901</span>, <span class="hljs-number">269</span>, <span class="hljs-number">921</span>, <span class="hljs-number">1306</span>, <span class="hljs-number">929</span>, <span class="hljs-number">292</span>, <span class="hljs-number">937</span>, <span class="hljs-number">554</span>, <span class="hljs-number">170</span>, <span class="hljs-number">940</span>, <span class="hljs-number">712</span>, <span class="hljs-number">970</span>, <span class="hljs-number">463</span>, <span class="hljs-number">1360</span>, <span class="hljs-number">340</span>, <span class="hljs-number">89</span>, <span class="hljs-number">122</span>, <span class="hljs-number">1254</span>, <span class="hljs-number">367</span>, <span class="hljs-number">1008</span>, <span class="hljs-number">1136</span>, <span class="hljs-number">248</span>, <span class="hljs-number">378</span>, <span class="hljs-number">763</span>, <span class="hljs-number">1020</span>}
+Channels <span class="hljs-keyword">for</span> Hotel <span class="hljs-number">13558</span>: {<span class="hljs-number">256</span>, <span class="hljs-number">385</span>, <span class="hljs-number">258</span>, <span class="hljs-number">390</span>, <span class="hljs-number">908</span>, <span class="hljs-number">1165</span>, <span class="hljs-number">270</span>, <span class="hljs-number">783</span>, <span class="hljs-number">1167</span>, <span class="hljs-number">532</span>, <span class="hljs-number">792</span>, <span class="hljs-number">1181</span>, <span class="hljs-number">30</span>, <span class="hljs-number">1311</span>, <span class="hljs-number">32</span>, <span class="hljs-number">292</span>, <span class="hljs-number">937</span>, <span class="hljs-number">939</span>, <span class="hljs-number">1070</span>, <span class="hljs-number">432</span>, <span class="hljs-number">440</span>, <span class="hljs-number">314</span>, <span class="hljs-number">318</span>, <span class="hljs-number">575</span>, <span class="hljs-number">965</span>, <span class="hljs-number">87</span>, <span class="hljs-number">863</span>, <span class="hljs-number">608</span>, <span class="hljs-number">127</span>, <span class="hljs-number">1008</span>, <span class="hljs-number">122</span>, <span class="hljs-number">1020</span>, <span class="hljs-number">255</span>}
+Overlap Channels: {<span class="hljs-number">292</span>, <span class="hljs-number">937</span>, <span class="hljs-number">1008</span>, <span class="hljs-number">122</span>, <span class="hljs-number">1020</span>}
+</div></code></pre>
+
+</body>
+</html>
